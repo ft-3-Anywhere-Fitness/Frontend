@@ -78,16 +78,19 @@ const SignUp = props => {
 	const { submitForm } = props;
 	const [formValues, setFormValues] = useState(emptySignUpFormValues);
 	const [formErrors, setFormErrors] = useState(emptySignUpFormErrors);
-	const [isFormValid, setIsFormValid] = useState();
+	const [isFormValid, setIsFormValid] = useState(true);
 
 
+	/** sets 'isFormValid' as formValues changes */
 	useEffect(() => {
-		schema.isValid(formValues).then(isValid => setIsFormValid(isValid));
-	}, [formValues])
+		schema.isValid(formValues).then(isValid => {
+			setIsFormValid(isValid);
+		});
+	}, [formValues]);
 
 
 	/** helper function that updates formErrors with any validation errors */
-	const validateField = (name, value, input) => {
+	const validateField = (name, value) => {
 		yup.reach(schema, name)
 			.validate(value)
 			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
@@ -101,11 +104,11 @@ const SignUp = props => {
 		const valueToUse = type === "checkbox" ? checked : value;
 
 		setFormValues({ ...formValues, [name]: valueToUse });
-		validateField(name, valueToUse, e.target);
+		validateField(name, valueToUse);
 	}
 
 
-	/** Call back for form 'onSubmit' event Prevents default submit behavior and calls submitForm() */
+	/** Call back for 'onSubmit' event - prevents default submit behavior and calls submitForm() */
 	const onSubmit = e => {
 		e.preventDefault();
 
@@ -127,7 +130,7 @@ const SignUp = props => {
 					<label for="signup-email">Email address</label>
 					<input
 						name="email" type="text" id="signup-email"
-						className={formErrors.email ? "invalid" : "" }
+						className={formErrors.email ? "invalid" : ""}
 						value={formValues.email} onChange={onChange} />
 					<ErrorText>{formErrors.email}</ErrorText>
 				</FormItem>
@@ -137,6 +140,7 @@ const SignUp = props => {
 					<label for="signup-password">Password</label>
 					<input
 						name="password" type="password" id="signup-password"
+						className={formErrors.password ? "invalid" : ""}
 						value={formValues.password} onChange={onChange} />
 					<ErrorText>{formErrors.password}</ErrorText>
 				</FormItem>
@@ -159,37 +163,25 @@ const SignUp = props => {
 					<label for="signup-full-name">Full Name</label>
 					<input
 						name="fullName" type="text" id="signup-full-name"
+						className={formErrors.fullName ? "invalid" : ""}
 						value={formValues.fullName} onChange={onChange} />
 					<ErrorText>{formErrors.fullName}</ErrorText>
 				</FormItem>
 
-				{/* --- Client/Instructor --- */}
-				{/* <p>Are you registering as an instructor?</p>
-					<label>
-					Yes
-					<input
-					type="radio" name="isInstructor" value="yes"
-							checked={formValues.isInstructor} onChange={onChange} />
-							</label>
-							<label>
-							No
-							<input
-							type="radio" name="isInstructor" value="no"
-							checked={!formValues.isInstructor} onChange={onChange} />
-						</label> */}
+				{/* --- Instructor Checkbox --- */}
 				<FormItem>
 					<label>
 						<input
 							name="isInstructor" type="checkbox" id="signup-is-instructor"
 							checked={formValues.isInstructor} onChange={onChange} />
-					Are you registering as an instructor?
+						Are you registering as an instructor?
 					</label>
 				</FormItem>
 
 				{/* --- Instructor Code --- */}
 				{formValues.isInstructor &&
 					<FormItem>
-						<label>Instructor Code</label>
+						<label for="signup-instructor-code">Instructor Code</label>
 						<input
 							name="instructorCode" type="text" id="signup-instructor-code"
 							value={formValues.instructorCode} onChange={onChange} />
