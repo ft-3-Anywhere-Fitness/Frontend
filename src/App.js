@@ -15,25 +15,16 @@ function App() {
         </nav>
       </header>
 
-      <Route path="/" exact render={props => {
-        return (
+      <Route path="/" exact>
           <div>Home page stuff</div>
-        );
-      }}>
       </Route>
 
-      <Route path="/signup" exact render={props => {
-        return (
+      <Route path="/signup" exact>
           <SignUp />
-        );
-      }}>
       </Route>
 
-      <Route path="/signin" exact render={props => {
-        return (
+      <Route path="/signin" exact>
           <SignIn />
-        );
-      }}>
       </Route>
     </div>
   );
