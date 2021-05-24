@@ -6,7 +6,7 @@ const InstructorPage = () => {
     const { push } = useHistory()
 
     const createButtonHandler = () => {
-        push('/')
+        push('/createclass')
     }
     
     return (
@@ -16,5 +16,6 @@ const InstructorPage = () => {
         </div>
     )
 }
+
 
 export default InstructorPage
