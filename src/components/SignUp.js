@@ -17,63 +17,6 @@ import { boolean } from "yup/lib/locale";
 		- checklist of fitness activities/interests
 */
 
-/** Style for the SignUp component */
-const SignInContainer = styled.div`
-
-	/* * {
-		border: 1px dotted #222222aa;
-		background-color: #22222201;
-		margin: 1px;
-		padding: 1px;
-	} */
-
-	h3 {
-
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.instructorRadio {
-		display: flex;
-		flex-direction: row;
-	}
-`;
-
-const FormItem = styled.div`
-	display: flex;
-	flex-direction: row;
-
-	.info {
-		width: 20em;
-		display: flex;
-		flex-direction: column;
-		text-align: right;
-		margin: 2px;
-		padding: 2px;
-	}
-
-input[type="text"] {
-	width: 20em;
-	height: 1.5em;
-	margin: 4px;
-}
-
-	label {
-		width: 100%;
-	}
-`;
-
-/** Style for error text */
-const ErrorText = styled.div`
-	color: red;
-	min-height: 1em;
-	font-size: 1em;
-`;
-
 /** Empty formValues object for initial state */
 const emptySignUpFormValues = {
 	email: '',
@@ -85,6 +28,50 @@ const emptySignUpFormValues = {
 
 /** Empty formErrors object for initial state */
 const emptySignUpFormErrors = { ...emptySignUpFormValues };
+
+/** Style for the SignUp component */
+const SignInContainer = styled.div`
+	max-width: 20em;
+	margin: auto;
+	text-align: left;
+
+	form {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: 100%;
+	}
+`;
+
+const FormItem = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-left: 0px;
+	margin-right: 0px;
+
+	label {
+		font-weight: 500;
+		margin: .3em;
+	}
+
+	input {
+		padding: .5em;
+		font-size: 1.2em;
+	}
+
+	input.invalid {
+		border: 2px solid red;
+	}
+
+`;
+
+/** Style for error text */
+const ErrorText = styled.div`
+	color: red;
+	min-height: 1em;
+	font-size: 1em;
+`;
+
 
 /** Component containing the new user sign up form */
 const SignUp = props => {
@@ -100,7 +87,7 @@ const SignUp = props => {
 
 
 	/** helper function that updates formErrors with any validation errors */
-	const validateField = (name, value) => {
+	const validateField = (name, value, input) => {
 		yup.reach(schema, name)
 			.validate(value)
 			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
@@ -110,11 +97,11 @@ const SignUp = props => {
 
 	/** Callback for input 'onChange' event */
 	const onChange = e => {
-		const { name, value, type } = e.target;
-		const valueToUse = type === "radio" ? value === "yes" : value;
+		const { name, value, type, checked } = e.target;
+		const valueToUse = type === "checkbox" ? checked : value;
 
 		setFormValues({ ...formValues, [name]: valueToUse });
-		validateField(name, valueToUse);
+		validateField(name, valueToUse, e.target);
 	}
 
 
@@ -137,25 +124,21 @@ const SignUp = props => {
 
 				{/* --- Email Address --- */}
 				<FormItem>
-					<div className='info'>
-						<label for="signup-email">E-mail address</label>
-						<ErrorText>{formErrors.email}</ErrorText>
-					</div>
-
+					<label for="signup-email">Email address</label>
 					<input
 						name="email" type="text" id="signup-email"
+						className={formErrors.email ? "invalid" : "" }
 						value={formValues.email} onChange={onChange} />
+					<ErrorText>{formErrors.email}</ErrorText>
 				</FormItem>
 
 				{/* --- Password --- */}
 				<FormItem>
-					<div className='info'>
-						<label for="signup-password">Password</label>
-						<ErrorText>{formErrors.password}</ErrorText>
-					</div>
+					<label for="signup-password">Password</label>
 					<input
 						name="password" type="password" id="signup-password"
 						value={formValues.password} onChange={onChange} />
+					<ErrorText>{formErrors.password}</ErrorText>
 				</FormItem>
 
 				{/* --- Password Confirmation --- */}
@@ -172,45 +155,46 @@ const SignUp = props => {
 				</label> */}
 
 				{/* --- Full Name --- */}
-				<label>
-					<label>
-						Full Name
-					</label>
-					<ErrorText>{formErrors.fullName}</ErrorText>
+				<FormItem>
+					<label for="signup-full-name">Full Name</label>
 					<input
 						name="fullName" type="text" id="signup-full-name"
 						value={formValues.fullName} onChange={onChange} />
-				</label>
+					<ErrorText>{formErrors.fullName}</ErrorText>
+				</FormItem>
 
 				{/* --- Client/Instructor --- */}
-				<div className="instructorRadio">
-					<p>Are you registering as an instructor?</p>
+				{/* <p>Are you registering as an instructor?</p>
 					<label>
-						<p>Yes</p>
-						<input
-							type="radio" name="isInstructor" value="yes"
+					Yes
+					<input
+					type="radio" name="isInstructor" value="yes"
 							checked={formValues.isInstructor} onChange={onChange} />
-					</label>
-
-					<label>
-						<p>No</p>
-						<input
+							</label>
+							<label>
+							No
+							<input
 							type="radio" name="isInstructor" value="no"
 							checked={!formValues.isInstructor} onChange={onChange} />
+						</label> */}
+				<FormItem>
+					<label>
+						<input
+							name="isInstructor" type="checkbox" id="signup-is-instructor"
+							checked={formValues.isInstructor} onChange={onChange} />
+					Are you registering as an instructor?
 					</label>
-				</div>
+				</FormItem>
 
 				{/* --- Instructor Code --- */}
 				{formValues.isInstructor &&
-					<label>
-						<label>
-							Instructor Code
-					</label>
-						<ErrorText>{formErrors.instructorCode}</ErrorText>
+					<FormItem>
+						<label>Instructor Code</label>
 						<input
 							name="instructorCode" type="text" id="signup-instructor-code"
 							value={formValues.instructorCode} onChange={onChange} />
-					</label>
+						<ErrorText>{formErrors.instructorCode}</ErrorText>
+					</FormItem>
 				}
 
 				{/* ---  Submit Button --- */}
