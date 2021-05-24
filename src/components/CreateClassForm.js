@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-
 const initialFormValues = {
     name: '',
     type: '',
