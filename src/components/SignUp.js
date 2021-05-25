@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import schema from './schema/signUpFormSchema';
 
@@ -73,12 +74,21 @@ const ErrorText = styled.div`
 
 
 /** Component containing the new user sign up form */
-const SignUp = props => {
-	const { submitForm } = props;
+const SignUp = () => {
+
 	const [formValues, setFormValues] = useState(emptySignUpFormValues);
 	const [formErrors, setFormErrors] = useState(emptySignUpFormErrors);
 	const [isFormValid, setIsFormValid] = useState(true);
 
+  const history = useHistory();
+
+	const submitForm = newUser => {
+		// user registration stuff goes here
+
+		// for now, I'm just gonna log it and redirect
+		console.log(newUser);
+		history.push('/signupsuccess');
+	};
 
 	/** sets 'isFormValid' as formValues changes */
 	useEffect(() => {
@@ -94,7 +104,7 @@ const SignUp = props => {
 			.validate(value)
 			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
 			.catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
-	}
+	};
 
 
 	/** Callback for input 'onChange' event */
@@ -104,7 +114,7 @@ const SignUp = props => {
 
 		setFormValues({ ...formValues, [name]: valueToUse });
 		validateField(name, valueToUse);
-	}
+	};
 
 
 	/** Call back for 'onSubmit' event - prevents default submit behavior and calls submitForm() */
