@@ -1,7 +1,54 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-const Data = {
+const DummyData = [
+    {
+        id: 1,
+        name: 'First',
+        type: 'weight lifting',
+        start_time: '9am',
+        duration: '1hr',
+        intensity_level: 'easy',
+        location: 'Planet Fitness',
+        current_attendees: 10,
+        max_attendees: 15
+    },
+    {
+        id: 2,
+        name: 'Second',
+        type: 'weight lifting',
+        start_time: '9am',
+        duration: '1hr',
+        intensity_level: 'easy',
+        location: 'Planet Fitness',
+        current_attendees: 10,
+        max_attendees: 15
+    },
+    {
+        id: 3,
+        name: 'Third',
+        type: 'weight lifting',
+        start_time: '9am',
+        duration: '1hr',
+        intensity_level: 'easy',
+        location: 'Planet Fitness',
+        current_attendees: 10,
+        max_attendees: 15
+    },
+    {
+        id: 4,
+        name: 'Fourth',
+        type: 'weight lifting',
+        start_time: '9am',
+        duration: '1hr',
+        intensity_level: 'easy',
+        location: 'Planet Fitness',
+        current_attendees: 10,
+        max_attendees: 15
+    }
+];
+
+const Empty = {
     name: '',
     type: '',
     start_time: '',
@@ -17,6 +64,8 @@ const EditClass = () => {
 
     const { id } = useParams();
 
+    const Data = DummyData.find(x => x.id == id);
+
     const [values, setValues] = useState(Data);
 
     const handleChange = (e) => {
@@ -28,12 +77,19 @@ const EditClass = () => {
     };
 
     const handleButtonClick = () => {
+
         history.push('/classes');
+
     };
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
+
+        // TODO - Request to change data of the correct object on submit.
+
         history.push('/classes');
+
     };
 
     return (

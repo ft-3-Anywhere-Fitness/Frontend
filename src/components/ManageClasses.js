@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import '../styles/ManageClasses.css';
 
-const Data = [
+const DummyData = [
     {
         id: 1,
         name: 'First',
@@ -54,9 +54,10 @@ const ManageClasses = (props) => {
     const history = useHistory();
 
     const [user, setUser] = useState({
-        username: '',
-        pssword: '',
-        role: ''
+        email: '',
+        password: '',
+        fullName: '',
+        instructorCode: '',
     });
 
     const [createdClasses, setCreatedClasses] = useState([]);
@@ -64,14 +65,17 @@ const ManageClasses = (props) => {
     const [availableClasses, setAvailableClasses] = useState([]);
 
     useEffect(() => {
-        setUser({ username: 'Test', password: 'Test', role: 'Instructor' });
-        setCreatedClasses([...Data]);
-        // setScheduledClasses([...Data]);
-        setAvailableClasses([...Data]);
+        // TODO - Get user data from the database and check if they are an instrcutor or client, which then loads the appropriate data.
+        setUser({ email: 'test@email.com', password: 'Test12345', fullName: 'Test', instructorCode: 'asdasdasd' });
+        setCreatedClasses([...DummyData]);
+        // setScheduledClasses([...DummyData]);
+        setAvailableClasses([...DummyData]);
     }, []);
 
     const handleButtonClick = () => {
-        switch (user.role) {
+        const Role = user.instructorCode.length > 0 ? 'Instructor' : 'Client';
+
+        switch (Role) {
             case ('Instructor'): {
                 history.push('/classes/create');
                 break;
@@ -88,13 +92,6 @@ const ManageClasses = (props) => {
 
     const handleEditClass = (id) => {
         history.push(`/classes/${id}`);
-    }
-;
-    const handleScheduled = (id) => {
-        const Find = scheduledClasses.find(x => x.id == id);
-        setAvailableClasses([...availableClasses, Find]);
-        const Filter = scheduledClasses.filter(x => x.id != id);
-        setScheduledClasses([...Filter]);
     };
 
     const handleAvailable = (id) => {
@@ -104,10 +101,17 @@ const ManageClasses = (props) => {
         setAvailableClasses([...Filter]);
     };
 
+    const handleScheduled = (id) => {
+        const Find = scheduledClasses.find(x => x.id == id);
+        setAvailableClasses([...availableClasses, Find]);
+        const Filter = scheduledClasses.filter(x => x.id != id);
+        setScheduledClasses([...Filter]);
+    };
+
     return (
         <div className='class-container'>
             {
-                user.role === 'Instructor'
+                user.instructorCode.length > 0
                 ?
                 <Fragment>
                     <div className='label-container'>
@@ -149,17 +153,17 @@ const ManageClasses = (props) => {
                         <p className='label-button' onClick={handleButtonClick}>Home Page</p>
                     </div>
                     {
-                        scheduledClasses.length > 0
+                        availableClasses.length > 0
                         &&
                         <Fragment>
                             <div className='label-container'>
-                                <h3 className='label-title'>Scheduled</h3>
+                                <h3 className='label-title'>Available</h3>
                             </div>
                             <div className='data-container'>
                                 {
-                                    scheduledClasses.map(avaiable => {
+                                    availableClasses.map(avaiable => {
                                         return (
-                                            <div className='card-container' onClick={() => handleScheduled(avaiable.id)} >
+                                            <div className='card-container' onClick={() => handleAvailable(avaiable.id)} >
                                                 <p><span className='text-highlight'>Name:</span> {avaiable.name}</p>
                                                 <p><span className='text-highlight'>Type:</span> {avaiable.type}</p>
                                                 <p><span className='text-highlight'>Start Time:</span> {avaiable.start_time}</p>
@@ -176,17 +180,17 @@ const ManageClasses = (props) => {
                         </Fragment>
                     }
                     {
-                        availableClasses.length > 0
+                        scheduledClasses.length > 0
                         &&
                         <Fragment>
                             <div className='label-container'>
-                                <h3 className='label-title'>Available</h3>
+                                <h3 className='label-title'>Scheduled</h3>
                             </div>
                             <div className='data-container'>
                                 {
-                                    availableClasses.map(avaiable => {
+                                    scheduledClasses.map(avaiable => {
                                         return (
-                                            <div className='card-container' onClick={() => handleAvailable(avaiable.id)} >
+                                            <div className='card-container' onClick={() => handleScheduled(avaiable.id)} >
                                                 <p><span className='text-highlight'>Name:</span> {avaiable.name}</p>
                                                 <p><span className='text-highlight'>Type:</span> {avaiable.type}</p>
                                                 <p><span className='text-highlight'>Start Time:</span> {avaiable.start_time}</p>
