@@ -118,3 +118,7 @@
 .input-style:focus {
     outline: none;
 }
+
+.input-style-no + .input-style-no {
+    margin-top: 10px;
+}
