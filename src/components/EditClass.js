@@ -82,11 +82,21 @@ const EditClass = () => {
 
     };
 
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
 
         e.preventDefault();
 
         // TODO - Request to change data of the correct object on submit.
+
+        history.push('/classes');
+
+    };
+
+    const handleDelete = (e) => {
+
+        e.preventDefault();
+
+        // TODO - Request to delete class from the database.
 
         history.push('/classes');
 
@@ -99,10 +109,10 @@ const EditClass = () => {
                 <p className='label-button' onClick={handleButtonClick}>Manage Classes</p>
             </div>
             <div className='label-container'>
-                <h3 className='label-title'>Edit Class</h3>
+                <h3 className='label-title'>Update/Delete Class</h3>
             </div>
             <div className='card-container-no'>
-                <form className='form-container' onSubmit={handleSubmit}>
+                <form className='form-container'>
                     <input
                         className='input-style'
                         name='name'
@@ -157,9 +167,10 @@ const EditClass = () => {
                         name='max_attendees'
                         value={values.max_attendees}
                         onChange={handleChange}
-                        placeholder='Class Size'
+                        placeholder='Max Class Size'
                     />
-                    <button className='input-style-no' type='submit'>Edit Class</button>
+                    <button className='input-style-no' type='button' onClick={handleUpdate}>Update Class</button>
+                    <button className='input-style-no' type='button' onClick={handleDelete}>Delete Class</button>
                 </form>
             </div>
         </div>
