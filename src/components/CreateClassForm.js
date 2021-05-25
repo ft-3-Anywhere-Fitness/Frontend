@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const initialFormValues = {
     name: '',
@@ -11,52 +12,49 @@ const initialFormValues = {
     maxClassSize: '',
 }
 const CreateClassForm = () => {
+    const history = useHistory();
+
     const [formValues, setFormValues] = useState(initialFormValues)
+
     const ChangeHandler = (e) => {
         setFormValues({...formValues,[e.target.name]: e.target.value })
-    }
+    };
 
-const submitHandler = (e) => {
-    e.preventDefault()
-    console.log('added new class!');
-}
+    const handleButtonClick = () => {
+        history.push('/classes');
+    };
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        console.log('added new class!');
+
+        // TODO - Add new class object to the database.
+
+        history.push('/classes');
+    };
+
     return (
-        <div>
-            <form onSubmit={submitHandler}>
-                <label>
-                Name
-                    <input type="text" name="name" value={formValues.name} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Type
-                    <input type="text" name="type" value={formValues.type} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Start Time
-                    <input type="text" name="startTime" value={formValues.startTime} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Duration
-                    <input type="text" name="duration" value={formValues.duration} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Intensity Level
-                    <input type="text" name="intensityLevel" value={formValues.intensityLevel} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Location
-                    <input type="text" name="location" value={formValues.location} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Registered Attendees
-                    <input type="text" name="registeredAttendees" value={formValues.registeredAttendees} onChange={ChangeHandler}/>
-                </label>
-                <label>
-                Max Class Size
-                    <input type="text" name="maxClassSize" value={formValues.maxClassSize} onChange={ChangeHandler}/>
-                </label>
-                <button> Add Class! </button>
-            </form>
+        <div className='class-container'>
+            <div className='label-container'>
+                <h3 className='label-title'>Instructor</h3>
+                <p className='label-button' onClick={handleButtonClick}>Manage Classes</p>
+            </div>
+            <div className='label-container'>
+                <h3 className='label-title'>Create Class</h3>
+            </div>
+            <div className='card-container-no'>
+                <form className='form-container' onSubmit={submitHandler}>
+                    <input className='input-style' type="text" name="name" value={formValues.name} placeholder="Name" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="type" value={formValues.type} placeholder="Type" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="startTime" value={formValues.startTime} placeholder="Start Time" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="duration" value={formValues.duration} placeholder="Duration" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="intensityLevel" value={formValues.intensityLevel} placeholder="Intensity Level" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="location" value={formValues.location} placeholder="Location" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="registeredAttendees" value={formValues.registeredAttendees} placeholder="Registered Attendees" onChange={ChangeHandler}/>
+                    <input className='input-style' type="text" name="maxClassSize" value={formValues.maxClassSize} placeholder="Max Class Size" onChange={ChangeHandler}/>
+                    <button className='input-style-no'>Add Class!</button>
+                </form>
+            </div>
         </div>
     )
 }
