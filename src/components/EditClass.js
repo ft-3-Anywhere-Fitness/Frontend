@@ -109,7 +109,7 @@ const EditClass = () => {
                 <p className='label-button' onClick={handleButtonClick}>Manage Classes</p>
             </div>
             <div className='label-container'>
-                <h3 className='label-title'>Edit Class</h3>
+                <h3 className='label-title'>Update/Delete Class</h3>
             </div>
             <div className='card-container-no'>
                 <form className='form-container'>
@@ -167,9 +167,9 @@ const EditClass = () => {
                         name='max_attendees'
                         value={values.max_attendees}
                         onChange={handleChange}
-                        placeholder='Class Size'
+                        placeholder='Max Class Size'
                     />
-                    <button className='input-style-no' type='button' onClick={handleUpdate}>Edit Class</button>
+                    <button className='input-style-no' type='button' onClick={handleUpdate}>Update Class</button>
                     <button className='input-style-no' type='button' onClick={handleDelete}>Delete Class</button>
                 </form>
             </div>
