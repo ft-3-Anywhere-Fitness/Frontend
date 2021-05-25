@@ -136,7 +136,7 @@ const SignUp = () => {
 
 				{/* --- Email Address --- */}
 				<FormItem>
-					<label for="signup-email">Email address</label>
+					<label htmlFor="signup-email">Email address</label>
 					<input
 						name="email" type="text" id="signup-email"
 						className={formErrors.email ? "invalid" : ""}
@@ -146,7 +146,7 @@ const SignUp = () => {
 
 				{/* --- Password --- */}
 				<FormItem>
-					<label for="signup-password">Password</label>
+					<label htmlFor="signup-password">Password</label>
 					<input
 						name="password" type="password" id="signup-password"
 						className={formErrors.password ? "invalid" : ""}
@@ -169,7 +169,7 @@ const SignUp = () => {
 
 				{/* --- Full Name --- */}
 				<FormItem>
-					<label for="signup-full-name">Full Name</label>
+					<label htmlFor="signup-full-name">Full Name</label>
 					<input
 						name="fullName" type="text" id="signup-full-name"
 						className={formErrors.fullName ? "invalid" : ""}
@@ -190,7 +190,7 @@ const SignUp = () => {
 				{/* --- Instructor Code --- */}
 				{formValues.isInstructor &&
 					<FormItem>
-						<label for="signup-instructor-code">Instructor Code</label>
+						<label htmlFor="signup-instructor-code">Instructor Code</label>
 						<input
 							name="instructorCode" type="text" id="signup-instructor-code"
 							value={formValues.instructorCode} onChange={onChange} />
