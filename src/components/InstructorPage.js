@@ -11,6 +11,8 @@ const DivContainer = styled.div`
     display:flex;
     flex-direction: row;
     flex-wrap:wrap;
+    justify-content: space-evenly;
+    margin-top: 1rem;
 `
 
 const InfoDiv = styled.div`
@@ -20,8 +22,8 @@ const InfoDiv = styled.div`
     padding: 1rem;
     width: 15rem;
     border: 2px solid black;
-    margin: .5rem 1rem 1rem 1rem;
     background-color: lightgrey;
+    margin: 1.5rem 0;
 `
 
 const StyledBtn = styled.button`
@@ -65,7 +67,18 @@ const initialClass = [
         location: 'Harbor Fitness',
         current_attendees: 20,
         max_attendees: 35
-      }
+      },
+    {
+        id: 3,
+        name: 'Fat Loss Supreme',
+        type: 'Cardio',
+        start_time: '10am',
+        duration: '1hr',
+        intensity_level: 'Medium',
+        location: 'Harbor Fitness',
+        current_attendees: 20,
+        max_attendees: 35
+      },
   ]
 
 const InstructorPage = () => {
