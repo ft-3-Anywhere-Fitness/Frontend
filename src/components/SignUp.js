@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import * as yup from 'yup';
 import schema from './schema/signUpFormSchema';
-import { boolean } from "yup/lib/locale";
 
 /*
 	Required form fields:

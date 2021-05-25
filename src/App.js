@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import { Link, Route, useHistory } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SignUpSuccess from './components/SignUpSuccess';
+import InstructorPage from './components/InstructorPage';
+import CreateClassForm from './components/CreateClassForm';
 
 function App() {
   const history = useHistory();
@@ -24,6 +25,7 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/signup">Sign up</Link>
           <Link to="/signin">Sign in</Link>
+          <Link to="/instructorpage">Temporary Instructor Page</Link>
         </nav>
       </header>
 
@@ -43,7 +45,13 @@ function App() {
           <SignIn />
       </Route>
 
+      <Route path="/instructorpage" exact>
+          <InstructorPage />
+      </Route>
 
+      <Route path="/createclass" exact>
+          <CreateClassForm />
+      </Route>
     </div>
   );
 }
