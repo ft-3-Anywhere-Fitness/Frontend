@@ -6,6 +6,7 @@ import './App.css';
 import ManageClasses from './components/ManageClasses';
 import EditClass from './components/EditClass';
 
+import Home from './components/HomePage'
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import SignUpSuccess from './components/SignUpSuccess';
@@ -26,8 +27,7 @@ function App() {
       <Switch>
 
         <Route exact path='/'>
-          <h2>Home</h2>
-          <div>Home page stuff</div>
+          <Home SignIn={SignIn} SignUp={SignUp}/>
         </Route>
 
         <Route exact path='/classes/create'>
