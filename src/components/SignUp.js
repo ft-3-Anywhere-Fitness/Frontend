@@ -41,20 +41,19 @@ const InputError = styled.img`
 
 /** Component containing the new user sign up form */
 const SignUp = () => {
-
 	const [formValues, setFormValues] = useState(emptySignUpFormValues);
 	const [formErrors, setFormErrors] = useState(emptySignUpFormErrors);
 	const [isFormValid, setIsFormValid] = useState(true);
-
 	const history = useHistory();
+
 
 	const submitForm = newUser => {
 		// user registration stuff goes here
-
 		// for now, I'm just gonna log it and redirect
 		console.log(newUser);
 		history.push('/signupsuccess');
 	};
+
 
 	/** sets 'isFormValid' as formValues changes */
 	useEffect(() => {
@@ -63,6 +62,7 @@ const SignUp = () => {
 		});
 	}, [formValues]);
 
+
 	/** helper function that updates formErrors with any validation errors */
 	const validateField = (name, value) => {
 		return yup.reach(schema, name)
@@ -70,6 +70,7 @@ const SignUp = () => {
 			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
 			.catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
 	};
+
 
 	/** Callback for input 'onChange' event */
 	const onChange = e => {
@@ -86,20 +87,11 @@ const SignUp = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		schema.validate(formValues, {abortEarly: false}).then((isValid) => {
+		//double check the form is valid before calling the provided submitForm callback
+		schema.isValid(formValues).then(isValid => {
 			if (isValid)
 				submitForm(formValues);
-		}).catch(error => {
-			console.log(error);
-			console.log(error.errors)
 		});
-
-
-		// double check the form is valid before calling the provided submitForm callback
-		// schema.isValid(formValues).then(isValid => {
-		// 	if (isValid)
-		// 		submitForm(formValues);
-		// });
 	};
 
 	return (

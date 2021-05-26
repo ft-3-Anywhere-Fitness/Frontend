@@ -66,7 +66,6 @@ export const FormItem = styled.div`
 		border: 1px solid #e92200;
 	}
 	input:focus {
-		/* border: 2px solid black; */
 		box-shadow: 0 0 0 4px #0088FF33;
 	}
 	input.invalid:focus {
@@ -84,18 +83,4 @@ export const ErrorText = styled.div`
 	text-shadow: none;
 	margin-left: 1em;
 	margin-top: .5em;
-
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-
-	img {
-		height: 2em;
-		width: 2em;
-	}
-
-	span {
-		vertical-align: middle;
-	}
 `;
