@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 // styled components
 const SignInContainer = styled.section`
-	max-width: 25%;
+	max-width: 20em;
 	text-align: left;
 	padding: 2%;
 	margin: 5% auto;
@@ -22,7 +22,7 @@ const SignInContainer = styled.section`
 	}
 
 	button {
-		width: 25%;
+		width: 40%;
 		align-self: center;
 		padding: 2%;
 		border: none;
