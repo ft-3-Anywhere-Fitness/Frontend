@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/signInSchema'
-import styled from 'styled-components'
 import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
 
 const initialSignIn = []
