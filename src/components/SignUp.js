@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
-import schema from './schema/signUpFormSchema';
+import schema from '../validation/signUpFormSchema';
 
 /*
 	Required form fields:
