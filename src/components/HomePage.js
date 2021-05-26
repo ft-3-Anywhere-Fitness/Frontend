@@ -1,14 +1,35 @@
 import styled from 'styled-components'
+import '../styles/ManageClasses.css';
 
 const StyledContainer = styled.div`
     background-color: ${props => props.theme.primaryColor};
 
-    h1{
+    h1 {
         padding: 2%;
         margin: 0;
+        text-shadow: 0px 0px 20px black;
+        letter-spacing: .1em;
+        color: white;
+        text-transform: uppercase;
+        font-size: 5em;
+    }
+    h3 {
         text-shadow: 0px 0px 10px black;
         letter-spacing: .1em;
         color: white;
+        font-size: 2.5em;
+        padding-left: 10%; 
+        text-shadow: 0px 0px 20px black;
+    }
+    p {
+        color: white;
+        font-size: 1.8em;
+        text-align: justify;
+        width: 75%;
+        text-shadow: 0px 0px 1px black;
+        @media ${props => props.theme.breakpointTablet} {
+            font-size: 1em;
+        }
     }
 `;
 
@@ -17,6 +38,26 @@ const StyledSection1 = styled.section`
     height: 50vh;
     background-size: cover;
     background-attachment: fixed;
+    background-position: bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const InfoSection = styled.section`
+    height: 100vh;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media ${props => props.theme.breakpointTablet} {
+        font-size: 1.5em;
+        }
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const StyledSection2 = styled.section`
@@ -24,11 +65,8 @@ const StyledSection2 = styled.section`
     height: 50vh;
     background-size: cover;
     background-attachment: fixed;
-`;
-
-const FillerSection = styled.section`
-    height: 50vh;
-
+    display: flex;
+    align-items: center;
 `;
 
 const StyledFooter = styled.footer`
@@ -36,9 +74,10 @@ const StyledFooter = styled.footer`
     text-shadow: 0px 0px 10px black;
     display: flex;
     background-color: ${props => props.theme.secondaryColor};
-    padding: 2% 0;
+    padding: 2%;
     div{
         width: 100%;
+        padding: 2%;
     }
     
 `;
@@ -46,15 +85,18 @@ const StyledFooter = styled.footer`
 export default function Home( {SignIn, SignUp} ) {
     return(
         <StyledContainer>
-            <h1>Anywhere Fitness</h1>
             <StyledSection1>
-
+                <h1>Anywhere Fitness</h1>
             </StyledSection1>
-            <FillerSection>
-
-            </FillerSection>
+            <InfoSection>
+                <div>
+                <p>These days, fitness classes can be held anywhere- a park, an unfinished basement or a garage- not just at a traditional gym. Certified fitness instructors need an easy way to take the awkwardness out of attendance taking and client payment processing.</p>
+                <p><strong>AnywhereFitness</strong> is the all-in-one solution to meet your “on-location” fitness class needs. AnywhereFitness makes it painless for Instructors and Clients alike to hold and attend Fitness classes wherever they might be held.</p>
+                <p>Instructors can take attendance, request and process payments, create virtual “punch passes” for each type of class offered, alert clients of cancellations or location changes and so much more. Clients can easily find out information on classes - location, class size, start time and duration, as well as reschedule or cancel an upcoming appointment or reservation right from the mobile app.</p>
+                </div>
+            </InfoSection>
             <StyledSection2>
-
+                <h3>Find classes near you today!</h3>
             </StyledSection2>
             <StyledFooter>
                 <div>
