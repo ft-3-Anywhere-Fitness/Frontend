@@ -6,8 +6,14 @@ import styled from 'styled-components'
 // styled components
 const SignInContainer = styled.section`
 	max-width: 25%;
-	margin: auto;
 	text-align: left;
+	padding: 2%;
+	margin: 5% auto;
+	background-color: #808080;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 10px;
 
 	form {
 		display: flex;
@@ -20,17 +26,27 @@ const SignInContainer = styled.section`
 		align-self: center;
 		padding: 2%;
 		border: none;
-		background-color: #1f075af2;
 		color: white;
-		transition: 0.5s
+		/* transition: 0.5s; */
+		background-color: #BEBEBE;
+		color: white;
+		box-shadow: 0px 0px 10px black;
+		border-radius: 10px;
+		margin-top: 3%;
+		font-size: 1em;
+		font-weight: 500;
+	}
+	button:hover {
+		transform: scale(1.1);
+		cursor: pointer;
 	}
 	button:disabled {
 		background-color: #fafafa;
 		color: #bdbdbd;
-		transform: scale(1);
 	}
-	button:hover {
-		transform: scale(1.1);
+	button:hover:disabled {
+		cursor: auto;
+		transform: scale(1);
 	}
 `;
 
