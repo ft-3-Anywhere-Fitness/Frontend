@@ -95,16 +95,16 @@ const ManageClasses = (props) => {
     };
 
     const handleAvailable = (id) => {
-        const Find = availableClasses.find(x => x.id == id);
+        const Find = availableClasses.find(x => x.id === id);
         setScheduledClasses([...scheduledClasses, Find]);
-        const Filter = availableClasses.filter(x => x.id != id);
+        const Filter = availableClasses.filter(x => x.id !== id);
         setAvailableClasses([...Filter]);
     };
 
     const handleScheduled = (id) => {
-        const Find = scheduledClasses.find(x => x.id == id);
+        const Find = scheduledClasses.find(x => x.id === id);
         setAvailableClasses([...availableClasses, Find]);
-        const Filter = scheduledClasses.filter(x => x.id != id);
+        const Filter = scheduledClasses.filter(x => x.id !== id);
         setScheduledClasses([...Filter]);
     };
 
@@ -129,7 +129,7 @@ const ManageClasses = (props) => {
                                 {
                                     createdClasses.map(created => {
                                         return (
-                                            <div className='card-container' onClick={() => handleEditClass(created.id)} >
+                                            <div key={created.id} className='card-container' onClick={() => handleEditClass(created.id)} >
                                                 <p><span className='text-highlight'>Name:</span> {created.name}</p>
                                                 <p><span className='text-highlight'>Type:</span> {created.type}</p>
                                                 <p><span className='text-highlight'>Start Time:</span> {created.start_time}</p>
@@ -161,17 +161,17 @@ const ManageClasses = (props) => {
                             </div>
                             <div className='data-container'>
                                 {
-                                    availableClasses.map(avaiable => {
+                                    availableClasses.map(available => {
                                         return (
-                                            <div className='card-container' onClick={() => handleAvailable(avaiable.id)} >
-                                                <p><span className='text-highlight'>Name:</span> {avaiable.name}</p>
-                                                <p><span className='text-highlight'>Type:</span> {avaiable.type}</p>
-                                                <p><span className='text-highlight'>Start Time:</span> {avaiable.start_time}</p>
-                                                <p><span className='text-highlight'>Duration:</span> {avaiable.duration}</p>
-                                                <p><span className='text-highlight'>Intensity Level:</span> {avaiable.intensity_level}</p>
-                                                <p><span className='text-highlight'>Location:</span> {avaiable.location}</p>
-                                                <p><span className='text-highlight'>Registered Attendees:</span> {avaiable.current_attendees}</p>
-                                                <p><span className='text-highlight'>Class Size:</span> {avaiable.max_attendees}</p>
+                                            <div key={available.id} className='card-container' onClick={() => handleAvailable(available.id)} >
+                                                <p><span className='text-highlight'>Name:</span> {available.name}</p>
+                                                <p><span className='text-highlight'>Type:</span> {available.type}</p>
+                                                <p><span className='text-highlight'>Start Time:</span> {available.start_time}</p>
+                                                <p><span className='text-highlight'>Duration:</span> {available.duration}</p>
+                                                <p><span className='text-highlight'>Intensity Level:</span> {available.intensity_level}</p>
+                                                <p><span className='text-highlight'>Location:</span> {available.location}</p>
+                                                <p><span className='text-highlight'>Registered Attendees:</span> {available.current_attendees}</p>
+                                                <p><span className='text-highlight'>Class Size:</span> {available.max_attendees}</p>
                                             </div>
                                         )
                                     })
@@ -188,17 +188,17 @@ const ManageClasses = (props) => {
                             </div>
                             <div className='data-container'>
                                 {
-                                    scheduledClasses.map(avaiable => {
+                                    scheduledClasses.map(available => {
                                         return (
-                                            <div className='card-container' onClick={() => handleScheduled(avaiable.id)} >
-                                                <p><span className='text-highlight'>Name:</span> {avaiable.name}</p>
-                                                <p><span className='text-highlight'>Type:</span> {avaiable.type}</p>
-                                                <p><span className='text-highlight'>Start Time:</span> {avaiable.start_time}</p>
-                                                <p><span className='text-highlight'>Duration:</span> {avaiable.duration}</p>
-                                                <p><span className='text-highlight'>Intensity Level:</span> {avaiable.intensity_level}</p>
-                                                <p><span className='text-highlight'>Location:</span> {avaiable.location}</p>
-                                                <p><span className='text-highlight'>Registered Attendees:</span> {avaiable.current_attendees}</p>
-                                                <p><span className='text-highlight'>Class Size:</span> {avaiable.max_attendees}</p>
+                                            <div key={available.id} className='card-container' onClick={() => handleScheduled(available.id)} >
+                                                <p><span className='text-highlight'>Name:</span> {available.name}</p>
+                                                <p><span className='text-highlight'>Type:</span> {available.type}</p>
+                                                <p><span className='text-highlight'>Start Time:</span> {available.start_time}</p>
+                                                <p><span className='text-highlight'>Duration:</span> {available.duration}</p>
+                                                <p><span className='text-highlight'>Intensity Level:</span> {available.intensity_level}</p>
+                                                <p><span className='text-highlight'>Location:</span> {available.location}</p>
+                                                <p><span className='text-highlight'>Registered Attendees:</span> {available.current_attendees}</p>
+                                                <p><span className='text-highlight'>Class Size:</span> {available.max_attendees}</p>
                                             </div>
                                         )
                                     })
