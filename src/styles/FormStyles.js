@@ -3,7 +3,7 @@ import warning from '../images/g4.svg';
 
 // styled components
 export const SignInContainer = styled.section`
-	max-width: 25em;
+	max-width: 20em;
 	text-align: left;
 	padding: 2%;
 	margin: 5% auto;
@@ -20,7 +20,7 @@ export const SignInContainer = styled.section`
 	}
 
 	button {
-		width: 25%;
+		width: 40%;
 		align-self: center;
 		padding: 2%;
 		border: none;

@@ -1,82 +1,8 @@
 import { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/signInSchema'
-<<<<<<< HEAD
-import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
-=======
 import styled from 'styled-components'
-
-// styled components
-const SignInContainer = styled.section`
-	max-width: 20em;
-	text-align: left;
-	padding: 2%;
-	margin: 5% auto;
-	background-color: #808080;
-    color: white;
-    text-shadow: 0px 0px 10px black;
-    box-shadow: 0px 0px 10px black;
-    border-radius: 10px;
-
-	form {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-
-	button {
-		width: 40%;
-		align-self: center;
-		padding: 2%;
-		border: none;
-		color: white;
-		/* transition: 0.5s; */
-		background-color: #BEBEBE;
-		color: white;
-		box-shadow: 0px 0px 10px black;
-		border-radius: 10px;
-		margin-top: 3%;
-		font-size: 1em;
-		font-weight: 500;
-	}
-	button:hover {
-		transform: scale(1.1);
-		cursor: pointer;
-	}
-	button:disabled {
-		background-color: #fafafa;
-		color: #bdbdbd;
-	}
-	button:hover:disabled {
-		cursor: auto;
-		transform: scale(1);
-	}
-`;
-
-const FormItem = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-
-	label {
-		font-weight: 500;
-		margin: 3%;
-	}
-	input {
-		padding: 3%;
-		font-size: 1.2em;
-	}
-	input.invalid {
-		border: 2px solid red;
-	}
-`;
-
-const ErrorText = styled.div`
-	color: red;
-	min-height: 1em;
-	font-size: 1em;
-`;
->>>>>>> main
+import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
 
 const initialSignIn = []
 

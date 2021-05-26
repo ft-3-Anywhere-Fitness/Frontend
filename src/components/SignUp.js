@@ -104,7 +104,7 @@ const SignUp = () => {
 				<FormItem>
 					<label htmlFor="signup-email">Email address</label>
 
-					<div style={{ position: 'relative', display: 'flex' }}>
+					<div style={{ position: 'relative', display: 'flex'}}>
 						<input style={{ width: '100%' }}
 							name="email" type="text" id="signup-email"
 							className={formErrors.email ? "invalid" : ""}
