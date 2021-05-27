@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/signInSchema'
 import styled from 'styled-components'
+import axios from 'axios'
 
 // styled components
 const SignInContainer = styled.section`
@@ -113,12 +114,19 @@ const onSubmit = (evt) => {
 		username: formValues.email.trim(),
 		password: formValues.password.trim(),
 	}
-	// postNewSignIn(newSignIn)
+	postNewSignIn(newSignIn)
 }
 
-// const postNewSignIn = newSignIn => {
-
-// }
+const postNewSignIn = newSignIn => {
+	axios.post('https://anywhere-fitness-3-ft.herokuapp.com/api/auth/login', newWSignIn)
+	.then(res => {
+		console.log(res)
+	})
+	.catch(err => {
+		console.log(err)
+	})
+	.finally(setFormValues(initialFormValues))
+}
 
 
 useEffect(() => {
