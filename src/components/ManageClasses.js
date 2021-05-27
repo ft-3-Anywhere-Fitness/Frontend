@@ -66,7 +66,7 @@ const ManageClasses = (props) => {
 
     useEffect(() => {
         // TODO - Get user data from the database and check if they are an instrcutor or client, which then loads the appropriate data.
-        setUser({ email: 'test@email.com', password: 'Test12345', fullName: 'Test', instructorCode: 'asdasdasd' });
+        setUser({ email: 'test@email.com', password: 'Test12345', fullName: 'Test', instructorCode: '12837asdhasd' });
         setCreatedClasses([...DummyData]);
         // setScheduledClasses([...DummyData]);
         setAvailableClasses([...DummyData]);
