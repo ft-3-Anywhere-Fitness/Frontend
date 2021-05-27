@@ -1,75 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-
-const DummyData = [
-    {
-        id: 1,
-        name: 'First',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    },
-    {
-        id: 2,
-        name: 'Second',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    },
-    {
-        id: 3,
-        name: 'Third',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    },
-    {
-        id: 4,
-        name: 'Fourth',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    }
-];
-
-const Empty = {
-    name: '',
-    type: '',
-    start_time: '',
-    duration: '',
-    intensity_level: '',
-    location: '',
-    current_attendees: '',
-    max_attendees: ''
-};
+import Axios from 'axios';
 
 const EditClass = () => {
     const history = useHistory();
 
     const { id } = useParams();
 
-    const Data = DummyData.find(x => x.id === id);
+    const [values, setValues] = useState({});
 
-    const [values, setValues] = useState(Data);
+    useEffect(() => {
+        Axios.get(`https://anywhere-fitness-3-ft.herokuapp.com/api/classes/${id}`)
+            .then(res => {
+                setValues(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, []);
 
     const handleChange = (e) => {
-
+        console.log(e.target);
         const { name, value } = e.target;
 
         setValues({ ...values, [name]: value });
@@ -86,7 +37,13 @@ const EditClass = () => {
 
         e.preventDefault();
 
-        // TODO - Request to change data of the correct object on submit.
+        Axios.put(`https://anywhere-fitness-3-ft.herokuapp.com/api/classes/${id}`, values)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
         history.push('/classes');
 
@@ -96,7 +53,13 @@ const EditClass = () => {
 
         e.preventDefault();
 
-        // TODO - Request to delete class from the database.
+        Axios.delete(`https://anywhere-fitness-3-ft.herokuapp.com/api/classes/${id}`)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
         history.push('/classes');
 
@@ -115,15 +78,15 @@ const EditClass = () => {
                 <form className='form-container'>
                     <input
                         className='input-style'
-                        name='name'
-                        value={values.name}
+                        name='fitness_class_name'
+                        value={values.fitness_class_name}
                         onChange={handleChange}
                         placeholder='Name'
                     />
                     <input
                         className='input-style'
-                        name='type'
-                        value={values.type}
+                        name='fitness_class_type'
+                        value={values.fitness_class_type }
                         onChange={handleChange}
                         placeholder='Type'
                     />
@@ -157,15 +120,15 @@ const EditClass = () => {
                     />
                     <input
                         className='input-style'
-                        name='current_attendees'
-                        value={values.current_attendees}
+                        name='fitness_class_attendees'
+                        value={values.fitness_class_attendees }
                         onChange={handleChange}
                         placeholder='Registered Attendees'
                     />
                     <input
                         className='input-style'
-                        name='max_attendees'
-                        value={values.max_attendees}
+                        name='fitness_class_max'
+                        value={values.fitness_class_max}
                         onChange={handleChange}
                         placeholder='Max Class Size'
                     />

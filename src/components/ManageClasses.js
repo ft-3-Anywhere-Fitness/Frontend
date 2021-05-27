@@ -1,54 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
 
 import '../styles/ManageClasses.css';
-
-const DummyData = [
-    {
-        id: 1,
-        name: 'First',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    },
-    {
-        id: 2,
-        name: 'Second',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    },
-    {
-        id: 3,
-        name: 'Third',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    },
-    {
-        id: 4,
-        name: 'Fourth',
-        type: 'weight lifting',
-        start_time: '9am',
-        duration: '1hr',
-        intensity_level: 'easy',
-        location: 'Planet Fitness',
-        current_attendees: 10,
-        max_attendees: 15
-    }
-];
 
 const ManageClasses = (props) => {
     const history = useHistory();
@@ -66,10 +20,18 @@ const ManageClasses = (props) => {
 
     useEffect(() => {
         // TODO - Get user data from the database and check if they are an instrcutor or client, which then loads the appropriate data.
-        setUser({ email: 'test@email.com', password: 'Test12345', fullName: 'Test', instructorCode: '12837asdhasd' });
-        setCreatedClasses([...DummyData]);
-        // setScheduledClasses([...DummyData]);
-        setAvailableClasses([...DummyData]);
+        setUser({ email: 'test@email.com', password: 'Test12345', fullName: 'Test', instructorCode: 'RANDOM' });
+    }, []);
+
+    useEffect(() => {
+        Axios.get('https://anywhere-fitness-3-ft.herokuapp.com/api/classes')
+            .then(res => {
+                setCreatedClasses(res.data);
+                setAvailableClasses(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }, []);
 
     const handleButtonClick = () => {
@@ -95,16 +57,16 @@ const ManageClasses = (props) => {
     };
 
     const handleAvailable = (id) => {
-        const Find = availableClasses.find(x => x.id === id);
+        const Find = availableClasses.find(x => x.fitness_class_id === id);
         setScheduledClasses([...scheduledClasses, Find]);
-        const Filter = availableClasses.filter(x => x.id !== id);
+        const Filter = availableClasses.filter(x => x.fitness_class_id !== id);
         setAvailableClasses([...Filter]);
     };
 
     const handleScheduled = (id) => {
-        const Find = scheduledClasses.find(x => x.id === id);
+        const Find = scheduledClasses.find(x => x.fitness_class_id === id);
         setAvailableClasses([...availableClasses, Find]);
-        const Filter = scheduledClasses.filter(x => x.id !== id);
+        const Filter = scheduledClasses.filter(x => x.fitness_class_id !== id);
         setScheduledClasses([...Filter]);
     };
 
@@ -129,15 +91,15 @@ const ManageClasses = (props) => {
                                 {
                                     createdClasses.map(created => {
                                         return (
-                                            <div key={created.id} className='card-container' onClick={() => handleEditClass(created.id)} >
-                                                <p><span className='text-highlight'>Name:</span> {created.name}</p>
-                                                <p><span className='text-highlight'>Type:</span> {created.type}</p>
+                                            <div key={created.fitness_class_id} className='card-container' onClick={() => handleEditClass(created.fitness_class_id)} >
+                                                <p><span className='text-highlight'>Name:</span> {created.fitness_class_name}</p>
+                                                <p><span className='text-highlight'>Type:</span> {created.fitness_class_type}</p>
                                                 <p><span className='text-highlight'>Start Time:</span> {created.start_time}</p>
                                                 <p><span className='text-highlight'>Duration:</span> {created.duration}</p>
                                                 <p><span className='text-highlight'>Intensity Level:</span> {created.intensity_level}</p>
                                                 <p><span className='text-highlight'>Location:</span> {created.location}</p>
-                                                <p><span className='text-highlight'>Registered Attendees:</span> {created.current_attendees}</p>
-                                                <p><span className='text-highlight'>Class Size:</span> {created.max_attendees}</p>
+                                                <p><span className='text-highlight'>Registered Attendees:</span> {created.fitness_class_attendees}</p>
+                                                <p><span className='text-highlight'>Class Size:</span> {created.fitness_class_max}</p>
                                             </div>
                                         )
                                     })
@@ -163,15 +125,15 @@ const ManageClasses = (props) => {
                                 {
                                     availableClasses.map(available => {
                                         return (
-                                            <div key={available.id} className='card-container' onClick={() => handleAvailable(available.id)} >
-                                                <p><span className='text-highlight'>Name:</span> {available.name}</p>
-                                                <p><span className='text-highlight'>Type:</span> {available.type}</p>
+                                            <div key={available.fitness_class_id} className='card-container' onClick={() => handleAvailable(available.fitness_class_id)} >
+                                                <p><span className='text-highlight'>Name:</span> {available.fitness_class_name}</p>
+                                                <p><span className='text-highlight'>Type:</span> {available.fitness_class_type}</p>
                                                 <p><span className='text-highlight'>Start Time:</span> {available.start_time}</p>
                                                 <p><span className='text-highlight'>Duration:</span> {available.duration}</p>
                                                 <p><span className='text-highlight'>Intensity Level:</span> {available.intensity_level}</p>
                                                 <p><span className='text-highlight'>Location:</span> {available.location}</p>
-                                                <p><span className='text-highlight'>Registered Attendees:</span> {available.current_attendees}</p>
-                                                <p><span className='text-highlight'>Class Size:</span> {available.max_attendees}</p>
+                                                <p><span className='text-highlight'>Registered Attendees:</span> {available.fitness_class_attendees}</p>
+                                                <p><span className='text-highlight'>Class Size:</span> {available.fitness_class_max}</p>
                                             </div>
                                         )
                                     })
@@ -190,15 +152,15 @@ const ManageClasses = (props) => {
                                 {
                                     scheduledClasses.map(available => {
                                         return (
-                                            <div key={available.id} className='card-container' onClick={() => handleScheduled(available.id)} >
-                                                <p><span className='text-highlight'>Name:</span> {available.name}</p>
-                                                <p><span className='text-highlight'>Type:</span> {available.type}</p>
+                                            <div key={available.fitness_class_id} className='card-container' onClick={() => handleScheduled(available.fitness_class_id)} >
+                                                <p><span className='text-highlight'>Name:</span> {available.fitness_class_name}</p>
+                                                <p><span className='text-highlight'>Type:</span> {available.fitness_class_type}</p>
                                                 <p><span className='text-highlight'>Start Time:</span> {available.start_time}</p>
                                                 <p><span className='text-highlight'>Duration:</span> {available.duration}</p>
                                                 <p><span className='text-highlight'>Intensity Level:</span> {available.intensity_level}</p>
                                                 <p><span className='text-highlight'>Location:</span> {available.location}</p>
-                                                <p><span className='text-highlight'>Registered Attendees:</span> {available.current_attendees}</p>
-                                                <p><span className='text-highlight'>Class Size:</span> {available.max_attendees}</p>
+                                                <p><span className='text-highlight'>Registered Attendees:</span> {available.fitness_class_attendees}</p>
+                                                <p><span className='text-highlight'>Class Size:</span> {available.fitness_class_max}</p>
                                             </div>
                                         )
                                     })
@@ -211,6 +173,5 @@ const ManageClasses = (props) => {
         </div>
     )
 }
-
 
 export default ManageClasses;
