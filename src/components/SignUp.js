@@ -27,6 +27,7 @@ const emptySignUpFormValues = {
 	password: '',
 	passwordConfirm: '',
 	fullName: '',
+	isInstructor: '',
 	instructorCode: '',
 }
 
