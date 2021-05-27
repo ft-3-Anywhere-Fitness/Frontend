@@ -27,7 +27,7 @@ const emptySignUpFormValues = {
 	password: '',
 	passwordConfirm: '',
 	fullName: '',
-	isInstructor: '',
+	isInstructor: false,
 	instructorCode: '',
 }
 
@@ -64,6 +64,7 @@ const SignUp = () => {
 			.then(response => signIn(newUser.username, newUser.password))
 			.then(response => history.push('/signupsuccess'))
 			.catch(error => {
+				setFormErrors({ ...formErrors, email: "Email address is already registered" });
 				console.log(error);
 			});
 	};

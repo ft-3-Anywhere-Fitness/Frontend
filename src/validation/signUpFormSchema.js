@@ -25,8 +25,7 @@ const schema = yup.object().shape({
 
 	isInstructor:
 		yup.boolean()
-			.optional()
-			.default(false),
+			.optional(),
 
 	instructorCode:
 		yup.string().trim()
