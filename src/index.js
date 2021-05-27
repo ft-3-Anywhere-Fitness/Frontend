@@ -11,6 +11,8 @@ import './index.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme'
 
 import { reducer } from './store';
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -18,9 +20,11 @@ const store = createStore(reducer, applyMiddleware(thunk, logger));
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <App />
+        </Router>
+      </ThemeProvider>
     </Provider>
   </StrictMode>,
   document.getElementById('root')

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
-import schema from './schema/signUpFormSchema';
+import schema from '../validation/signUpFormSchema';
+import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
+import warning from '../images/g4.svg';
 
 /*
 	Required form fields:
@@ -29,66 +31,29 @@ const emptySignUpFormValues = {
 /** Empty formErrors object for initial state */
 const emptySignUpFormErrors = { ...emptySignUpFormValues };
 
-/** Style for the SignUp component */
-const SignInContainer = styled.div`
-	max-width: 20em;
-	margin: auto;
-	text-align: left;
-
-	form {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		width: 100%;
-	}
+const InputError = styled.img`
+	position: absolute;
+	top: 50%;
+	right: .7em;
+	margin-top: -9px;
+	pointer-events: none;
 `;
-
-const FormItem = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-left: 0px;
-	margin-right: 0px;
-
-	label {
-		font-weight: 500;
-		margin: .3em;
-	}
-
-	input {
-		padding: .5em;
-		font-size: 1.2em;
-	}
-
-	input.invalid {
-		border: 2px solid red;
-	}
-
-`;
-
-/** Style for error text */
-const ErrorText = styled.div`
-	color: red;
-	min-height: 1em;
-	font-size: 1em;
-`;
-
 
 /** Component containing the new user sign up form */
 const SignUp = () => {
-
 	const [formValues, setFormValues] = useState(emptySignUpFormValues);
 	const [formErrors, setFormErrors] = useState(emptySignUpFormErrors);
 	const [isFormValid, setIsFormValid] = useState(true);
+	const history = useHistory();
 
-  const history = useHistory();
 
 	const submitForm = newUser => {
 		// user registration stuff goes here
-
 		// for now, I'm just gonna log it and redirect
 		console.log(newUser);
 		history.push('/signupsuccess');
 	};
+
 
 	/** sets 'isFormValid' as formValues changes */
 	useEffect(() => {
@@ -100,7 +65,7 @@ const SignUp = () => {
 
 	/** helper function that updates formErrors with any validation errors */
 	const validateField = (name, value) => {
-		yup.reach(schema, name)
+		return yup.reach(schema, name)
 			.validate(value)
 			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
 			.catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
@@ -113,6 +78,7 @@ const SignUp = () => {
 		const valueToUse = type === "checkbox" ? checked : value;
 
 		setFormValues({ ...formValues, [name]: valueToUse });
+
 		validateField(name, valueToUse);
 	};
 
@@ -121,7 +87,7 @@ const SignUp = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		// double check the form is valid before calling the provided submitForm callback
+		//double check the form is valid before calling the provided submitForm callback
 		schema.isValid(formValues).then(isValid => {
 			if (isValid)
 				submitForm(formValues);
@@ -130,28 +96,48 @@ const SignUp = () => {
 
 	return (
 		<SignInContainer>
-			<h3>Sign up</h3>
+			<h2>Sign up</h2>
 
 			<form onSubmit={onSubmit}>
 
 				{/* --- Email Address --- */}
 				<FormItem>
 					<label htmlFor="signup-email">Email address</label>
-					<input
-						name="email" type="text" id="signup-email"
-						className={formErrors.email ? "invalid" : ""}
-						value={formValues.email} onChange={onChange} />
-					<ErrorText>{formErrors.email}</ErrorText>
+
+					<div style={{ position: 'relative', display: 'flex' }}>
+						<input style={{ width: '100%' }}
+							name="email" type="text" id="signup-email"
+							className={formErrors.email ? "invalid" : ""}
+							value={formValues.email} onChange={onChange} />
+
+						{formErrors.email &&
+							<InputError src={warning} alt="warning" width='20' height='20' />
+						}
+					</div>
+
+					{formErrors.email &&
+						<ErrorText>{formErrors.email}</ErrorText>
+					}
 				</FormItem>
 
 				{/* --- Password --- */}
 				<FormItem>
 					<label htmlFor="signup-password">Password</label>
-					<input
-						name="password" type="password" id="signup-password"
-						className={formErrors.password ? "invalid" : ""}
-						value={formValues.password} onChange={onChange} />
-					<ErrorText>{formErrors.password}</ErrorText>
+
+					<div style={{ position: 'relative', display: 'flex' }}>
+						<input style={{ width: '100%', paddingRight: formErrors.password ? '35px' : 'inherit' }}
+							name="password" type="password" id="signup-password"
+							className={formErrors.password ? "invalid" : ""}
+							value={formValues.password} onChange={onChange} />
+
+						{formErrors.password &&
+							<InputError src={warning} alt="warning" width='20' height='20' />
+						}
+					</div>
+
+					{formErrors.password &&
+						<ErrorText>{formErrors.password}</ErrorText>
+					}
 				</FormItem>
 
 				{/* --- Password Confirmation --- */}
@@ -170,11 +156,20 @@ const SignUp = () => {
 				{/* --- Full Name --- */}
 				<FormItem>
 					<label htmlFor="signup-full-name">Full Name</label>
-					<input
-						name="fullName" type="text" id="signup-full-name"
-						className={formErrors.fullName ? "invalid" : ""}
-						value={formValues.fullName} onChange={onChange} />
-					<ErrorText>{formErrors.fullName}</ErrorText>
+					<div style={{ position: 'relative', display: 'flex' }}>
+						<input style={{ width: '100%' }}
+							name="fullName" type="text" id="signup-full-name"
+							className={formErrors.fullName ? "invalid" : ""}
+							value={formValues.fullName} onChange={onChange} />
+
+						{formErrors.fullName &&
+							<InputError src={warning} alt="warning" width='20' height='20' />
+						}
+					</div>
+
+					{formErrors.fullName &&
+						<ErrorText>{formErrors.fullName}</ErrorText>
+					}
 				</FormItem>
 
 				{/* --- Instructor Checkbox --- */}
@@ -191,9 +186,15 @@ const SignUp = () => {
 				{formValues.isInstructor &&
 					<FormItem>
 						<label htmlFor="signup-instructor-code">Instructor Code</label>
-						<input
-							name="instructorCode" type="text" id="signup-instructor-code"
-							value={formValues.instructorCode} onChange={onChange} />
+						<div style={{ position: 'relative', display: 'flex' }}>
+							<input style={{ width: '100%' }}
+								name="instructorCode" type="text" id="signup-instructor-code"
+								value={formValues.instructorCode} onChange={onChange} />
+
+							{formErrors.instructorCode &&
+								<InputError src={warning} alt="warning" width='20' height='20' />
+							}
+						</div>
 						<ErrorText>{formErrors.instructorCode}</ErrorText>
 					</FormItem>
 				}

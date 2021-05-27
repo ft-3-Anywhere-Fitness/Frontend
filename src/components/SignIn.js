@@ -1,62 +1,7 @@
 import { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/signInSchema'
-import styled from 'styled-components'
-
-// styled components
-const SignInContainer = styled.section`
-	max-width: 25%;
-	margin: auto;
-	text-align: left;
-
-	form {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-
-	button {
-		width: 25%;
-		align-self: center;
-		padding: 2%;
-		border: none;
-		background-color: #1f075af2;
-		color: white;
-		transition: 0.5s
-	}
-	button:disabled {
-		background-color: #fafafa;
-		color: #bdbdbd;
-		transform: scale(1);
-	}
-	button:hover {
-		transform: scale(1.1);
-	}
-`;
-
-const FormItem = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-
-	label {
-		font-weight: 500;
-		margin: 3%;
-	}
-	input {
-		padding: 3%;
-		font-size: 1.2em;
-	}
-	input.invalid {
-		border: 2px solid red;
-	}
-`;
-
-const ErrorText = styled.div`
-	color: red;
-	min-height: 1em;
-	font-size: 1em;
-`;
+import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
 
 const initialSignIn = []
 
@@ -111,11 +56,11 @@ useEffect(() => {
 
 	return (
 		<SignInContainer>
-			<h2>Sign In</h2>
+			<h2 id='sign-in-h'>Sign In</h2>
 			<form onSubmit={onSubmit}>
 				<FormItem>
 					<label>Email</label>
-						<input 
+						<input
 							type='email'
 							name='email'
 							placeholder='enter email'
@@ -128,7 +73,7 @@ useEffect(() => {
 
 				<FormItem>
 					<label>Password</label>
-						<input 
+						<input
 							type='password'
 							name='password'
 							placeholder='enter password'
