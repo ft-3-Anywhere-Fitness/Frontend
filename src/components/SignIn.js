@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/signInSchema'
+<<<<<<< HEAD
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -74,6 +75,9 @@ const ErrorText = styled.div`
 	min-height: 1em;
 	font-size: 1em;
 `;
+=======
+import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
+>>>>>>> 446e5d6c323328149af9e7b72f9522a22db189ef
 
 const initialSignIn = []
 
@@ -135,11 +139,11 @@ useEffect(() => {
 
 	return (
 		<SignInContainer>
-			<h2>Sign In</h2>
+			<h2 id='sign-in-h'>Sign In</h2>
 			<form onSubmit={onSubmit}>
 				<FormItem>
 					<label>Email</label>
-						<input 
+						<input
 							type='email'
 							name='email'
 							placeholder='enter email'
@@ -152,7 +156,7 @@ useEffect(() => {
 
 				<FormItem>
 					<label>Password</label>
-						<input 
+						<input
 							type='password'
 							name='password'
 							placeholder='enter password'
