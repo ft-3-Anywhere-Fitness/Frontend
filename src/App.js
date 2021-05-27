@@ -19,8 +19,8 @@ function App() {
       <header className="App-header">
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/signup">Sign up</Link>
-          <Link to="/signin">Sign in</Link>
+          <a href="#sign-in-h2">Sign in</a>
+          <a href="#sign-up-h2">Sign up</a>
           <Link to="/classes">Manage Classes</Link>
         </nav>
       </header>

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 // styled components
 export const SignInContainer = styled.section`
-	box-sizing: border-box;
 	max-width: 25em;
 	text-align: left;
 	padding: 2%;
