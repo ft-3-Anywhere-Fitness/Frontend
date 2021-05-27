@@ -64,7 +64,7 @@ const EditClass = () => {
 
     const { id } = useParams();
 
-    const Data = DummyData.find(x => x.id === id);
+    const Data = DummyData.find(x => x.id == id);
 
     const [values, setValues] = useState(Data);
 
