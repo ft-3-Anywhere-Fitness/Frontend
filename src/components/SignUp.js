@@ -6,7 +6,7 @@ import schema from '../validation/signUpFormSchema';
 import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
 import warning from '../images/g4.svg';
 import axios from "axios";
-import { signIn } from "../utils/signIn";
+import { signIn } from "../utils/auth";
 
 /*
 	Required form fields:
