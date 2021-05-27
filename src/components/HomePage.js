@@ -55,17 +55,6 @@ const StyledSection1 = styled.section`
 `;
 
 const InfoSection = styled.section`
-    /* height: 100vh; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-
-    /* div{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    } */
     padding: 1em 0em;
     margin: auto;
 `;
