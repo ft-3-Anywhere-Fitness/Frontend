@@ -17,3 +17,7 @@ export const signIn = (username, password) => {
 		}
 	});
 };
+
+export const signOut = () => {
+	localStorage.removeItem('token');
+};
