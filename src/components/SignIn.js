@@ -3,6 +3,8 @@ import * as yup from 'yup'
 import schema from '../validation/signInSchema'
 import axios from 'axios'
 import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
+import { signIn } from '../utils/auth'
+import { useHistory } from 'react-router-dom';
 
 
 const initialSignIn = []
@@ -24,6 +26,7 @@ const [signInInfo, setSignInInfo] = useState(initialSignIn)
 const [formValues, setFormValues] = useState(initialFormValues)
 const [formErrors, setFormErrors] = useState(initialFormErrors)
 const [disabled, setDisabled] = useState(initialDisabled)
+const history = useHistory()
 
 const onChange = (evt) => {
 	const { name, value } = evt.target
@@ -44,20 +47,11 @@ const onSubmit = (evt) => {
 		username: formValues.email.trim(),
 		password: formValues.password.trim(),
 	}
-	postNewSignIn(newSignIn)
+	signIn(newSignIn.username, newSignIn.password)
+	.then(res => console.log(res))
+	.then(response => history.push('/signupsuccess'))
+	.catch(err => console.log(err))
 }
-
-const postNewSignIn = newSignIn => {
-	axios.post('https://anywhere-fitness-3-ft.herokuapp.com/api/auth/login', newSignIn)
-	.then(res => {
-		console.log(res)
-	})
-	.catch(err => {
-		console.log(err)
-	})
-	.finally(setFormValues(initialFormValues))
-}
-
 
 useEffect(() => {
 	schema.isValid(formValues).then(valid => setDisabled(!valid))
