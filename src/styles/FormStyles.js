@@ -91,7 +91,7 @@ export const FormItem = styled.div`
 `;
 
 export const ErrorText = styled.div`
-	color: white;
+	color: #e92200;
 	min-height: 1em;
 	font-size: 1em;
 	text-shadow: none;
