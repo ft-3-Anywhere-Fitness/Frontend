@@ -26,6 +26,7 @@ const [signInInfo, setSignInInfo] = useState(initialSignIn)
 const [formValues, setFormValues] = useState(initialFormValues)
 const [formErrors, setFormErrors] = useState(initialFormErrors)
 const [disabled, setDisabled] = useState(initialDisabled)
+const [signInError, setSignInError] = useState('')
 const history = useHistory()
 
 const onChange = (evt) => {
@@ -49,8 +50,11 @@ const onSubmit = (evt) => {
 	}
 	signIn(newSignIn.username, newSignIn.password)
 	.then(res => console.log(res))
-	.then(response => history.push('/signupsuccess'))
-	.catch(err => console.log(err))
+	.then(response => history.push('/classes'))
+	.catch(err => {
+		console.log(err)
+		setSignInError(err)
+	})
 }
 
 useEffect(() => {
@@ -86,6 +90,7 @@ useEffect(() => {
 						/>
 					<ErrorText>{formErrors.password}</ErrorText>
 				</FormItem>
+				<ErrorText>{signInError ? 'Unable to sign in' : null}</ErrorText>
 				<button disabled={disabled}>Sign In</button>
 			</form>
 		</SignInContainer>
