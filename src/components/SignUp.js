@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import schema from '../validation/signUpFormSchema';
 import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
 import warning from '../images/g4.svg';
+import axios from "axios";
+import { signIn } from "../utils/auth";
 
 /*
 	Required form fields:
@@ -47,11 +49,22 @@ const SignUp = () => {
 	const history = useHistory();
 
 
-	const submitForm = newUser => {
+	const submitForm = formData => {
 		// user registration stuff goes here
 		// for now, I'm just gonna log it and redirect
-		console.log(newUser);
-		history.push('/signupsuccess');
+
+		const newUser = {
+			username: formData.email,
+			password: formData.password
+		}
+
+		axios.post('https://anywhere-fitness-3-ft.herokuapp.com/api/auth/register', newUser)
+			//sign up was sucessful, so go ahead and sign in
+			.then(response => signIn(newUser.username, newUser.password))
+			.then(response => history.push('/signupsuccess'))
+			.catch(error => {
+				console.log(error);
+			});
 	};
 
 

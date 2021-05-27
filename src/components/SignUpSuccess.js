@@ -1,6 +1,12 @@
 const SignUpSuccess = props => {
 	return (
-		<div>User signed up successfully!</div>
+		<div>
+			<p>
+				User signed up successfully!
+			</p>
+			<p>Here's your token! {localStorage.getItem('token')}</p>
+		</div>
+
 	);
 };
 
