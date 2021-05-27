@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import warning from '../images/g4.svg';
 
 // styled components
 export const SignInContainer = styled.section`
+	box-sizing: border-box;
 	max-width: 25em;
 	text-align: left;
 	padding: 2%;
@@ -34,14 +34,17 @@ export const SignInContainer = styled.section`
 		font-size: 1em;
 		font-weight: 500;
 	}
+
 	button:hover {
 		transform: scale(1.1);
 		cursor: pointer;
 	}
+
 	button:disabled {
 		background-color: #fafafa;
 		color: #bdbdbd;
 	}
+
 	button:hover:disabled {
 		cursor: auto;
 		transform: scale(1);
@@ -57,20 +60,25 @@ export const FormItem = styled.div`
 		font-weight: 500;
 		margin: 3%;
 	}
+
 	input {
 		padding: 3%;
 		font-size: 1.2em;
 		border: 1px solid black;
 	}
+
 	input.invalid {
 		border: 1px solid #e92200;
 	}
+
 	input:focus {
 		box-shadow: 0 0 0 4px #0088FF33;
 	}
+
 	input.invalid:focus {
 		box-shadow: 0 0 0 4px #e9220044;
 	}
+
 	input:focus-visible {
 		outline: none;
 	}
