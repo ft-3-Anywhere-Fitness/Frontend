@@ -6,16 +6,23 @@ export const SignInContainer = styled.section`
 	text-align: left;
 	padding: 2%;
 	margin: 5% auto;
-	background-color: #808080;
-	color: white;
-	text-shadow: 0px 0px 10px black;
-	box-shadow: 0px 0px 10px black;
-	border-radius: 10px;
+	/* background-color: #808080; */
+	background-color: #f6f6f6;
+	color: #2d2941;
+	/* text-shadow: 0px 0px 10px black; */
+	/* box-shadow: 0px 0px 10px black; */
+	border-radius: 8px;
+	border: 5px solid #434f63;
 
 	form {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+	}
+
+	h2 {
+		margin: .5em 0em .2em;
+		text-align: center;
 	}
 
 	button {
@@ -57,11 +64,11 @@ export const FormItem = styled.div`
 
 	label {
 		font-weight: 500;
-		margin: 3%;
+		margin: .5em;
 	}
 
 	input {
-		padding: 3%;
+		padding: .5em;
 		font-size: 1.2em;
 		border: 1px solid black;
 	}
@@ -84,7 +91,7 @@ export const FormItem = styled.div`
 `;
 
 export const ErrorText = styled.div`
-	color: white;
+	color: #e92200;
 	min-height: 1em;
 	font-size: 1em;
 	text-shadow: none;
