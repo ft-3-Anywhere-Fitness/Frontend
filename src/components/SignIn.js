@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
 import * as yup from 'yup'
 import schema from '../validation/signInSchema'
+import axios from 'axios'
 import { SignInContainer, FormItem, ErrorText } from '../styles/FormStyles'
+import { signIn } from '../utils/auth'
+import { useHistory } from 'react-router-dom';
+
 
 const initialSignIn = []
 
@@ -22,6 +26,8 @@ const [signInInfo, setSignInInfo] = useState(initialSignIn)
 const [formValues, setFormValues] = useState(initialFormValues)
 const [formErrors, setFormErrors] = useState(initialFormErrors)
 const [disabled, setDisabled] = useState(initialDisabled)
+const [signInError, setSignInError] = useState('')
+const history = useHistory()
 
 const onChange = (evt) => {
 	const { name, value } = evt.target
@@ -42,13 +48,14 @@ const onSubmit = (evt) => {
 		username: formValues.email.trim(),
 		password: formValues.password.trim(),
 	}
-	// postNewSignIn(newSignIn)
+	signIn(newSignIn.username, newSignIn.password)
+	.then(res => console.log(res))
+	.then(response => history.push('/classes'))
+	.catch(err => {
+		console.log(err)
+		setSignInError(err)
+	})
 }
-
-// const postNewSignIn = newSignIn => {
-
-// }
-
 
 useEffect(() => {
 	schema.isValid(formValues).then(valid => setDisabled(!valid))
@@ -83,6 +90,7 @@ useEffect(() => {
 						/>
 					<ErrorText>{formErrors.password}</ErrorText>
 				</FormItem>
+				<ErrorText>{signInError ? 'Unable to sign in' : null}</ErrorText>
 				<button disabled={disabled}>Sign In</button>
 			</form>
 		</SignInContainer>
