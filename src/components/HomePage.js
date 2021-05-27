@@ -1,17 +1,21 @@
 import styled from 'styled-components'
 import '../styles/ManageClasses.css';
+import photo1 from '../images/photo-1.jfif';
+import photo2 from '../images/photo-2.jfif';
+import background1 from '../images/background-1.jpg';
 
 const StyledContainer = styled.div`
     background-color: ${props => props.theme.primaryColor};
     display: flex;
     flex-direction: column;
 
+    color: ${p => p.theme.white};
+
     h1 {
         padding: 2%;
         margin: 0;
         text-shadow: 0px 0px 20px black;
         letter-spacing: .1em;
-        color: white;
         text-transform: uppercase;
         font-size: 5em;
         @media ${props => props.theme.breakpointTablet} {
@@ -22,14 +26,12 @@ const StyledContainer = styled.div`
     h3 {
         text-shadow: 0px 0px 10px black;
         letter-spacing: .1em;
-        color: white;
         font-size: 2.5em;
         padding: 10%;
         text-shadow: 0px 0px 20px black;
     }
 
     p {
-        color: white;
         font-size: 1.6em;
         text-align: justify;
         width: 75%;
@@ -43,7 +45,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledSection1 = styled.section`
-    background-image: url('https://images.unsplash.com/photo-1607962837359-5e7e89f86776?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+    background-image: url(${photo2});
     height: 50vh;
     background-size: cover;
     background-attachment: fixed;
@@ -55,12 +57,13 @@ const StyledSection1 = styled.section`
 `;
 
 const InfoSection = styled.section`
+    background-image: linear-gradient(#353949,#26203d);
     padding: 1em 0em;
     margin: auto;
 `;
 
 const StyledSection2 = styled.section`
-    background-image: url('https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80');
+    background-image: url(${photo1});
     height: 50vh;
     background-size: cover;
     background-attachment: fixed;
@@ -70,12 +73,11 @@ const StyledSection2 = styled.section`
 `;
 
 const StyledFooter = styled.footer`
-    color: white;
-    text-shadow: 0px 0px 10px black;
+    /* text-shadow: 0px 0px 10px black; */
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: ${props => props.theme.secondaryColor};
+    background: linear-gradient(#2d2941, #20232c);
     padding: 2%;
 
     &>div {
